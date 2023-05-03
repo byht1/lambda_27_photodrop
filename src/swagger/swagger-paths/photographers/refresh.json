@@ -1,0 +1,28 @@
+{
+  "/api/photographers/refresh": {
+    "get": {
+      "tags": ["Photographers"],
+      "summary": "Update access token",
+      "description": "Updates the access token using the cookie httpOnly=true ",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "Photographers data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/accessToken"
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Server error"
+        },
+        "401": {
+          "description": "Not authorized"
+        }
+      }
+    }
+  }
+}

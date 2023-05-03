@@ -1,0 +1,12 @@
+{
+  "photographersUserCurrentResponse": {
+    "allOf": [
+      {
+        "$ref": "#/components/schemas/photographersUser"
+      },
+      {
+        "$ref": "#/components/schemas/accessToken"
+      }
+    ]
+  }
+}

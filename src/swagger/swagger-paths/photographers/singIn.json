@@ -1,0 +1,48 @@
+{
+  "/api/photographers/singIn": {
+    "post": {
+      "tags": ["Photographers"],
+      "summary": "Entry for photographers",
+      "description": "Login for photos using a login and password",
+      "consumes": ["application/json"],
+      "parameters": [
+        {
+          "in": "body",
+          "name": "body",
+          "description": "JSON-тіло запиту",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "login": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
+            },
+            "required": ["login", "password"]
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Photographers data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/photographersUserCurrentResponse"
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Server error"
+        },
+        "401": {
+          "description": "Not authorized"
+        }
+      }
+    }
+  }
+}

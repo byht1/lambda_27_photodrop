@@ -1,0 +1,28 @@
+{
+  "/api/photographers/current": {
+    "get": {
+      "tags": ["Photographers"],
+      "summary": "Get information about the user by token",
+      "description": "Allows you to get information about the photographer using a token. If the token is valid, then you will receive data, if not, then there will be an error",
+      "parameters": [{ "$ref": "#/components/schemas/auth" }],
+      "responses": {
+        "200": {
+          "description": "Photographers data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/photographersUser"
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Server error"
+        },
+        "403": {
+          "description": "Not authorized"
+        }
+      }
+    }
+  }
+}

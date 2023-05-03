@@ -1,0 +1,21 @@
+{
+  "/api/photographers/logout": {
+    "get": {
+      "tags": ["Photographers"],
+      "summary": "Sign out of the account",
+      "description": "Sign out of your account using the cookie httpOnly=true ",
+      "parameters": [],
+      "responses": {
+        "204": {
+          "description": "You have successfully logged out of your account"
+        },
+        "500": {
+          "description": "Server error"
+        },
+        "401": {
+          "description": "Not authorized"
+        }
+      }
+    }
+  }
+}
