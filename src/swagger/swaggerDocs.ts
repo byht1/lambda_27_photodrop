@@ -5,11 +5,11 @@ export const swaggerDocs = {
   openapi: '3.0.3',
   info: {
     title: 'Swagger - OpenAPI 3.0',
-    version: '1.0.01',
+    version: '1.0.1',
   },
   servers: [
     {
-      url: 'https://lambda-24-northwind.onrender.com ',
+      url: 'https://lambda-27-photodrop.onrender.com',
     },
   ],
   tags: [
