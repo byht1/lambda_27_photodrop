@@ -4,8 +4,8 @@ import { getDrizzle } from 'db/connectDB';
 import { photographers } from 'db/schema';
 import {
   IPhotographersRepository,
+  TDeleteInvalidTokensFn,
   TGetByIdFn,
-  TGetByIdVerifyFn,
   TGetByLoginFn,
   TTokenUpdateFn,
 } from './type';
@@ -16,7 +16,7 @@ export class PhotographersRepository implements IPhotographersRepository {
   getByLogin: TGetByLoginFn = async searchLogin => {
     const { login, id, password } = this.table;
     const user = await this.db
-      .select({ id, password, login })
+      .select({ id, password })
       .from(this.table)
       .where(eq(login, searchLogin));
 
@@ -24,34 +24,25 @@ export class PhotographersRepository implements IPhotographersRepository {
   };
 
   tokenUpdate: TTokenUpdateFn = async (userId, newToken) => {
-    const { id, email, createdAt, firstName, lastName } = this.table;
+    const { id } = this.table;
     const user = await this.db
       .update(this.table)
       .set({ token: newToken })
       .where(eq(id, userId))
-      .returning({ id, email, createdAt, firstName, lastName });
+      .returning({ id });
 
     return user[0];
   };
 
   getById: TGetByIdFn = async userId => {
-    const { createdAt, email, firstName, lastName, role, id } = this.table;
-    const user = await this.db
-      .select({ createdAt, email, firstName, lastName, role, id })
-      .from(this.table)
-      .where(eq(id, userId));
+    const { id } = this.table;
+    const user = await this.db.select().from(this.table).where(eq(id, userId));
 
     return user[0];
   };
 
-  getByIdVerify: TGetByIdVerifyFn = async userId => {
-    const { id } = this.table;
-
-    const user = await this.db.select().from(this.table).where(eq(id, userId));
-
-    return user.at(0);
+  deleteInvalidTokens: TDeleteInvalidTokensFn = async searchToken => {
+    const { token } = this.table;
+    await this.db.update(this.table).set({ token: '' }).where(eq(token, searchToken));
   };
 }
-
-export const { getByIdVerify: photographersGetByIdVerify, tokenUpdate: photographersTokenUpdate } =
-  new PhotographersRepository();

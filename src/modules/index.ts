@@ -1,1 +1,1 @@
-export * from './photographers/photographers.module';
+export * from './auth/auth.module';
