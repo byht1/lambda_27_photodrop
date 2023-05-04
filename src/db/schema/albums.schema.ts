@@ -10,7 +10,7 @@ export const albums = pgTable('albums', {
     .references(() => photographers.id),
   name: varchar('first_name', { length: 50 }).notNull(),
   location: varchar('location', { length: 250 }).notNull(),
-  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  createdAt: varchar('created_at', { length: 25 }).notNull(),
   photos: varchar('photos').array().default([]),
 });
 

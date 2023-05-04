@@ -14,7 +14,7 @@ export const swaggerDocs = {
   ],
   tags: [
     {
-      name: 'Photographers',
+      name: 'Auth',
     },
   ],
   paths,

@@ -5,7 +5,7 @@
         "$ref": "#/components/schemas/photographersUser"
       },
       {
-        "$ref": "#/components/schemas/accessToken"
+        "$ref": "#/components/schemas/token"
       }
     ]
   }

@@ -8,10 +8,10 @@ export const albumsOfPhotographers = pgTable(
   'albums_of_photographers',
   {
     photographersId: uuid('photographers_id').references(() => photographers.id),
-    albumsId: uuid('albums_id').references(() => albums.id),
+    albumId: uuid('albums_id').references(() => albums.id),
   },
   table => ({
-    id: primaryKey(table.albumsId, table.photographersId),
+    id: primaryKey(table.albumId, table.photographersId),
   })
 );
 

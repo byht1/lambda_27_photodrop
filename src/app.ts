@@ -2,7 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import { getEnv } from 'helpers';
-import { photographersRouter } from 'modules';
+import { albumRouter, authRouter } from 'modules';
 import morgan from 'morgan';
 import { INewError } from 'type';
 import { swaggerRouter } from 'swagger/router';
@@ -17,7 +17,8 @@ app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 
-app.use('/api', photographersRouter);
+app.use('/api', authRouter);
+app.use('/api', albumRouter);
 app.use('/', swaggerRouter);
 
 app.use((req, res) => {

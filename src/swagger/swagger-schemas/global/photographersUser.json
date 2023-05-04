@@ -5,22 +5,6 @@
       "id": {
         "type": "string",
         "example": "b6aa1eff-6f05-4531-ab9c-12c63db20279"
-      },
-      "firstName": {
-        "type": "string",
-        "example": "Tom"
-      },
-      "lastName": {
-        "type": "string",
-        "example": "Cruise"
-      },
-      "email": {
-        "type": "string",
-        "example": "TomCruise@gmail.com"
-      },
-      "createdAt": {
-        "type": "string",
-        "example": "2023-04-30T18:59:57.440Z"
       }
     }
   }

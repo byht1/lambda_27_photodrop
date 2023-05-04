@@ -1,7 +1,7 @@
 {
-  "/api/photographers/singIn": {
+  "/api/auth/singIn": {
     "post": {
-      "tags": ["Photographers"],
+      "tags": ["Auth"],
       "summary": "Entry for photographers",
       "description": "Login for photos using a login and password",
       "consumes": ["application/json"],
@@ -9,7 +9,7 @@
         {
           "in": "body",
           "name": "body",
-          "description": "JSON-тіло запиту",
+          "description": "JSON-body request",
           "required": true,
           "schema": {
             "type": "object",

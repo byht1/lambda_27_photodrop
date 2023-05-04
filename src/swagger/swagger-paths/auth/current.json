@@ -1,7 +1,7 @@
 {
-  "/api/photographers/current": {
+  "/api/auth/current": {
     "get": {
-      "tags": ["Photographers"],
+      "tags": ["Auth"],
       "summary": "Get information about the user by token",
       "description": "Allows you to get information about the photographer using a token. If the token is valid, then you will receive data, if not, then there will be an error",
       "parameters": [{ "$ref": "#/components/schemas/auth" }],

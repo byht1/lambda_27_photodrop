@@ -12,4 +12,4 @@ const { singIn, getUserByToken } = new AuthController();
 router.post(`/${breakpointName}/singIn`, validate(singInDto, 'body'), ctrlWrapper(singIn));
 router.get(`/${breakpointName}/current`, validateToken, ctrlWrapper(getUserByToken));
 
-export const photographersRouter = router;
+export const authRouter = router;
