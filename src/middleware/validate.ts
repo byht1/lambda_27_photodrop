@@ -17,7 +17,12 @@ export const validate = (schema: ZodType, field: TField = 'body'): TMiddlewareFn
         return acc;
       }, {});
 
-      res.status(400).json(customError);
+      const errorResponse = {
+        invalid: field,
+        ...customError,
+      };
+
+      res.status(400).json(errorResponse);
     }
   };
 };

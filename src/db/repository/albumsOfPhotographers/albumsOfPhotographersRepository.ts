@@ -6,6 +6,6 @@ export class AlbumsOfPhotographersRepository {
   constructor(protected db = getDrizzle(), private columns = albumsOfPhotographers) {}
 
   protected addNewAlbum: TAddNewAlbumFn = async (photographersId, albumId) => {
-    this.db.insert(this.columns).values({ photographersId, albumId });
+    await this.db.insert(this.columns).values({ photographersId, albumId });
   };
 }

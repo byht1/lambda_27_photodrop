@@ -1,18 +1,17 @@
 import { InferModel } from 'drizzle-orm';
 import { pgTable, uuid, varchar } from 'drizzle-orm/pg-core';
+import { albums } from './albums.schema';
 
-import { photographers } from './photographers.schema';
-
-export const albums = pgTable('albums', {
+export const photos = pgTable('photos', {
   id: uuid('id').defaultRandom().primaryKey(),
-  owner: uuid('owner')
+  albumId: uuid('album_id')
     .notNull()
-    .references(() => photographers.id),
+    .references(() => albums.id),
   name: varchar('first_name', { length: 50 }).notNull(),
-  location: varchar('location', { length: 250 }).notNull(),
+  people: varchar('people').array().default([]),
+  url: varchar('url').notNull(),
   createdAt: varchar('created_at', { length: 25 }).notNull(),
 });
 
 export type TAlbums = InferModel<typeof albums>;
 export type TNewAlbums = InferModel<typeof albums, 'insert'>;
-export type TableAlbums = typeof albums;

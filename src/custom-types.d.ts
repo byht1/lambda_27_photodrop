@@ -10,8 +10,7 @@ declare global {
    * @template Body - тип тіла запиту
    * @template Query - тип query параметрів запиту
    */
-  interface Req<Params = void, Body = any, Query = void, Cookie = any>
-    extends Request<Params, any, Body> {
+  interface Req<Params = void, Body = any, Query = any> extends Request<Params, any, Body, Query> {
     user?: TPhotographers;
   }
   /**

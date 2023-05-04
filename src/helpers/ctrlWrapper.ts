@@ -1,7 +1,7 @@
 import { TCtrlWrapperFunc } from 'type';
 
-export const ctrlWrapper = <T, B>(ctrl: TRouterFn<T, B>) => {
-  const func: TCtrlWrapperFunc = async (req, res, next) => {
+export const ctrlWrapper = <D, B, P, Q>(ctrl: TRouterFn<D, B, P, Q>) => {
+  const func: TCtrlWrapperFunc<D, B, P, Q> = async (req, res, next) => {
     try {
       await ctrl(req, res, next);
     } catch (error) {
