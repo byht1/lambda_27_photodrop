@@ -1,0 +1,20 @@
+{
+  "QueryPage": {
+    "in": "query",
+    "name": "page",
+    "schema": {
+      "type": "integer",
+      "default": "1"
+    },
+    "description": "Page number to retrieve"
+  },
+  "QueryLimit": {
+    "in": "query",
+    "name": "limit",
+    "schema": {
+      "type": "integer",
+      "default": "20"
+    },
+    "description": "Maximum number of products per page"
+  }
+}

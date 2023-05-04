@@ -1,0 +1,27 @@
+{
+  "albumCreate": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "example": "b6aa1eff-6f05-4531-ab9c-12c63db20279"
+      },
+      "owner": {
+        "type": "string",
+        "example": "b6aa1eff-6f05-4531-ab9c-12c63db20279"
+      },
+      "name": {
+        "type": "string",
+        "example": "TestAlbum200"
+      },
+      "location": {
+        "type": "string",
+        "example": "Brooklyn"
+      },
+      "createdAt": {
+        "type": "string",
+        "example": "12/12/1955"
+      }
+    }
+  }
+}

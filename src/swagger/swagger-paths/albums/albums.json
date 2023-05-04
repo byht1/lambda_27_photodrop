@@ -1,0 +1,88 @@
+{
+  "/api/albums": {
+    "post": {
+      "tags": ["Albums"],
+      "summary": "Create a new album",
+      "description": "Create a new album",
+      "consumes": ["application/json"],
+      "parameters": [
+        {
+          "in": "body",
+          "name": "body",
+          "description": "JSON-body request",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "albumName": {
+                "type": "string",
+                "example": "TestAlbum200"
+              },
+              "location": {
+                "type": "string",
+                "example": "Brooklyn"
+              },
+              "date": {
+                "type": "string",
+                "example": "20/08/1999"
+              }
+            },
+            "required": ["albumName", "date", "date"]
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Album created",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/albumCreate"
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Server error"
+        },
+        "401": {
+          "description": "Not authorized"
+        },
+        "400": {
+          "description": "Bad Request"
+        }
+      }
+    },
+    "get": {
+      "tags": ["Albums"],
+      "summary": "Get all albums",
+      "description": "Get all albums",
+      "consumes": ["application/json"],
+      "parameters": [
+        { "$ref": "#/components/schemas/QueryPage" },
+        { "$ref": "#/components/schemas/QueryLimit" }
+      ],
+      "responses": {
+        "200": {
+          "description": "Album created",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/getAllAlbumsResponse"
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Server error"
+        },
+        "401": {
+          "description": "Not authorized"
+        },
+        "400": {
+          "description": "Bad Request"
+        }
+      }
+    }
+  }
+}

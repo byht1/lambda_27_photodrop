@@ -16,6 +16,9 @@ export const swaggerDocs = {
     {
       name: 'Auth',
     },
+    {
+      name: 'Albums',
+    },
   ],
   paths,
   components: {

@@ -1,0 +1,18 @@
+{
+  "getAllAlbumsResponse": {
+    "allOf": [
+      { "$ref": "#/components/schemas/pagination" },
+      {
+        "type": "object",
+        "properties": {
+          "albums": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/albumCreate"
+            }
+          }
+        }
+      }
+    ]
+  }
+}
