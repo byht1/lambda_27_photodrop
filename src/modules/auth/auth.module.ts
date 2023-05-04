@@ -5,7 +5,7 @@ import { singInDto } from './dto/singIn.dto';
 import { AuthController } from './auth.controller';
 
 const router = express.Router();
-const breakpointName = 'photographers';
+const breakpointName = 'auth';
 
 const { singIn, getUserByToken } = new AuthController();
 
