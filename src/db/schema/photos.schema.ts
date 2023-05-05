@@ -10,8 +10,7 @@ export const photos = pgTable('photos', {
   name: varchar('first_name', { length: 50 }).notNull(),
   people: varchar('people').array().default([]),
   url: varchar('url').notNull(),
-  createdAt: varchar('created_at', { length: 25 }).notNull(),
 });
 
-export type TAlbums = InferModel<typeof albums>;
-export type TNewAlbums = InferModel<typeof albums, 'insert'>;
+export type TPhotos = InferModel<typeof photos>;
+export type TNewPhotos = InferModel<typeof photos, 'insert'>;

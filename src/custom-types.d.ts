@@ -1,5 +1,6 @@
 import { TPhotographers } from 'db/schema';
 import { Request, Response, NextFunction } from 'express';
+import { IUploadedFile } from 'middleware';
 
 declare global {
   /**
@@ -12,6 +13,7 @@ declare global {
    */
   interface Req<Params = void, Body = any, Query = any> extends Request<Params, any, Body, Query> {
     user?: TPhotographers;
+    // files?: IUploadedFile;
   }
   /**
    * Тип `Res` визначає тип об'єкту відповіді.
@@ -30,7 +32,7 @@ declare global {
    * @template P - тип параметрів запиту
    * @template Q - тип query параметрів запиту
    */
-  type TRouterFn<D, B, P = void, Q = void> = (
+  type TRouterFn<D, B, P = void, Q = any> = (
     req: Req<P, B, Q>,
     res: Res<D>,
     next?: Next

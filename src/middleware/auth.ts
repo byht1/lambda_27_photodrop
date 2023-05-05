@@ -23,6 +23,7 @@ export class Auth {
       const user = await this.photographersModel.getById(id);
       if (!user?.token) throw new Error();
       req.user = user;
+
       next();
     } catch (error) {
       await this.photographersModel.deleteInvalidTokens(token);

@@ -1,9 +1,18 @@
 import { createError } from 'helpers/error/createError';
 import { AlbumService } from './album.service';
-import { IAlbumController, TCreateAlbumRoutFn, TGetAlbumsRoutFn } from './type';
+import {
+  IAlbumController,
+  TAddPhotosToAlbumRoutFn,
+  TCreateAlbumRoutFn,
+  TGetAlbumsRoutFn,
+} from './type';
+import { PhotosService } from './photos.service';
 
 export class AlbumController implements IAlbumController {
-  constructor(private albumService: AlbumService = new AlbumService()) {}
+  constructor(
+    private albumService: AlbumService = new AlbumService(),
+    private photosService: PhotosService = new PhotosService()
+  ) {}
 
   createAlbum: TCreateAlbumRoutFn = async (req, res) => {
     const albumDataCreate = req.body;
@@ -18,5 +27,14 @@ export class AlbumController implements IAlbumController {
     const albums = await this.albumService.getAlbums(queryParams);
 
     return res.json(albums);
+  };
+
+  addPhotosToAlbum: TAddPhotosToAlbumRoutFn = async (req, res) => {
+    const { albumId } = req.params;
+    const files = req.files as Express.Multer.File[];
+
+    const photos = await this.photosService.addPhotosToAlbum(files, albumId);
+
+    return res.json(photos);
   };
 }
