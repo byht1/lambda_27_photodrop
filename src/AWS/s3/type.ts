@@ -9,7 +9,7 @@ export type TUploadFilesFn = (...args: ArgumentsUploadFilesFn) => Promise<string
 export type TGenerateParamsS3Fn = (...args: ArgumentsGenerateParamsS3Fn) => TBucketParams;
 export type TUploadToS3Fn = (params: TBucketParams, isPrivate: boolean) => Promise<string>;
 
-type ArgumentsUploadFilesFn = [Express.Multer.File[], TRootFolder, string];
+type ArgumentsUploadFilesFn = [TFile[], TRootFolder, string];
 type ArgumentsGenerateParamsS3Fn = [string, Buffer, TRootFolder, string, string];
 type TRootFolder = `${ERootFolder}`;
 
@@ -23,5 +23,13 @@ export type TBucketParams = {
   CreateBucketConfiguration: {
     LocationConstraint: string;
   };
+};
+
+type TFile = {
+  filename: string;
+  originalname: string;
+  buffer: Buffer;
+  mimetype: string;
+  path: string;
 };
 export type TAcl = 'private' | 'public-read';

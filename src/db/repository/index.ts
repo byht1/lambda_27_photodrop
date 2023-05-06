@@ -5,3 +5,4 @@ export * from './albums/albumsRepository';
 export { TCreateAlbumData } from './albums/type';
 
 export * from './photos/photosRepository';
+export { TGetAllPhotosAlbum } from './photos/type';

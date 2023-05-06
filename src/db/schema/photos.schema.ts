@@ -10,6 +10,7 @@ export const photos = pgTable('photos', {
   name: varchar('first_name', { length: 50 }).notNull(),
   people: varchar('people').array().default([]),
   url: varchar('url').notNull(),
+  originalUrl: varchar('original_url').notNull(),
 });
 
 export type TPhotos = InferModel<typeof photos>;

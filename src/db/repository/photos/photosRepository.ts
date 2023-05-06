@@ -11,10 +11,15 @@ export class PhotosRepository implements IPhotosRepository {
     return newPhotosResponse;
   };
 
-  getAll: TGetAllFn = async searchAlbumId => {
-    const { albumId } = this.table;
+  getAll: TGetAllFn = async (searchAlbumId, isOwner) => {
+    const { albumId, id, name, originalUrl, people, url: watermarkUrl } = this.table;
     const photosForAlbum = await this.db
-      .select()
+      .select({
+        id,
+        name,
+        people,
+        url: isOwner ? originalUrl : watermarkUrl,
+      })
       .from(this.table)
       .where(eq(albumId, searchAlbumId));
 

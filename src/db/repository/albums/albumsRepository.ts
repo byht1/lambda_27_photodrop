@@ -1,7 +1,8 @@
-import { IAlbumsRepository, TAlbumsCreateFn, TGetAllFn } from './type';
+import { IAlbumsRepository, TAlbumsCreateFn, TGetAllFn, TGetByIdFn } from './type';
 import { TableAlbums, albums } from 'db/schema';
 import { AlbumsOfPhotographersRepository } from '../albumsOfPhotographers/albumsOfPhotographersRepository';
 import { CountPagination } from '../helpers';
+import { eq } from 'drizzle-orm';
 
 export class AlbumsRepository extends AlbumsOfPhotographersRepository implements IAlbumsRepository {
   constructor(
@@ -28,5 +29,12 @@ export class AlbumsRepository extends AlbumsOfPhotographersRepository implements
     const [albums, maxElement] = await Promise.all([albumPromise, maxElementPromise]);
     const maxPage = Math.ceil(maxElement / limit);
     return { maxPage, albums };
+  };
+
+  getById: TGetByIdFn = async searchId => {
+    const { id } = this.table;
+    const album = await this.db.select().from(this.table).where(eq(id, searchId));
+
+    return album.at(0);
   };
 }

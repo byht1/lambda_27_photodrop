@@ -4,7 +4,7 @@ import multer from 'multer';
 import { join as pathJoin } from 'path';
 import { v4 as uuidv4 } from 'uuid';
 
-const temporaryDir = pathJoin(__dirname, '../temporary');
+const temporaryDir = pathJoin(__dirname, '../temporary/original');
 
 export interface IUploadedFile {
   fieldname: string;

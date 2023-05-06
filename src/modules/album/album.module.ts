@@ -8,7 +8,7 @@ import { paginationDto } from 'modules/dto/pagination.dto';
 const router = express.Router();
 const breakpointName = 'album';
 
-const { createAlbum, getAlbums, addPhotosToAlbum } = new AlbumController();
+const { createAlbum, getAlbums, addPhotosToAlbum, getPhotosForAlbum } = new AlbumController();
 
 router.post(
   `/${breakpointName}`,
@@ -22,11 +22,12 @@ router.get(
   validate(paginationDto, 'query'),
   ctrlWrapper(getAlbums)
 );
-router.post<'/album/photos/:albumId', any>(
-  `/${breakpointName}/photos/:albumId`,
+router.post<'/album/:albumId/photos', any>(
+  `/${breakpointName}/:albumId/photos`,
   validateToken,
   uploadFiles,
   ctrlWrapper(addPhotosToAlbum)
 );
+router.get(`/${breakpointName}/:albumId/photos`, validateToken, ctrlWrapper(getPhotosForAlbum));
 
 export const albumRouter = router;

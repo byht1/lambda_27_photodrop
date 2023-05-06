@@ -6,4 +6,6 @@ export interface IPhotosRepository {
 }
 
 export type TAddPhotosFn = (newPhotos: TNewPhotos[]) => Promise<TPhotos[]>;
-export type TGetAllFn = (albumId: string) => Promise<TPhotos[]>;
+export type TGetAllFn = (albumId: string, isOwner: boolean) => Promise<TGetAllPhotosAlbum[]>;
+
+export type TGetAllPhotosAlbum = Omit<TPhotos, 'albumId' | 'originalUrl'>;

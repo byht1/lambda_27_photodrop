@@ -5,6 +5,7 @@ import {
   TAddPhotosToAlbumRoutFn,
   TCreateAlbumRoutFn,
   TGetAlbumsRoutFn,
+  TGetPhotosForAlbumRoutFn,
 } from './type';
 import { PhotosService } from './photos.service';
 
@@ -36,5 +37,15 @@ export class AlbumController implements IAlbumController {
     const photos = await this.photosService.addPhotosToAlbum(files, albumId);
 
     return res.json(photos);
+  };
+
+  getPhotosForAlbum: TGetPhotosForAlbumRoutFn = async (req, res) => {
+    const { albumId } = req.params;
+    const user = req.user;
+    if (!user) throw createError(500);
+
+    const data = await this.photosService.getPhotosForAlbum(user.id, albumId);
+
+    return res.json(data);
   };
 }
