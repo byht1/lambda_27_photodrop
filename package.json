@@ -7,7 +7,7 @@
     "start": "NODE_PATH=./dist node ./dist/app.js",
     "dev": "nodemon",
     "create-dir": "cp -R src/temporary dist",
-    "build": "rm -rf ./dist && tsc -p tsconfig.json && yarn create-dir",
+    "build": "rm -rf ./dist && tsc -p tsconfig.json",
     "prod": "yarn build && yarn start",
     "dk-generate": "drizzle-kit generate:pg",
     "dk-up": "drizzle-kit up:pg",
