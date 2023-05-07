@@ -45,7 +45,7 @@
         "500": {
           "description": "Server error"
         },
-        "401": {
+        "403": {
           "description": "Not authorized"
         },
         "400": {
@@ -76,7 +76,7 @@
         "500": {
           "description": "Server error"
         },
-        "401": {
+        "403": {
           "description": "Not authorized"
         },
         "400": {

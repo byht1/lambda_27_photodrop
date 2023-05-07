@@ -5,6 +5,7 @@ import pagination from './global/pagination.json';
 import photographersUserCurrentResponse from './response/photographersUserCurrentResponse.json';
 import albumCreate from './response/albumCreate.json';
 import getAllAlbums from './response/getAllAlbumsResponse.json';
+import photos from './response/photos.json';
 
 import authHeader from './headers/authHeader.json';
 
@@ -19,4 +20,5 @@ export const schemas = {
   ...pagination,
   ...getAllAlbums,
   ...paginationQuery,
+  ...photos,
 };

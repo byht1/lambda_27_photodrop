@@ -1,9 +1,9 @@
 {
-  "/api/auth/singIn": {
+  "/api/album/photos/person": {
     "post": {
-      "tags": ["Auth"],
-      "summary": "Entry for photographers",
-      "description": "Login for photos using a login and password",
+      "tags": ["Albums"],
+      "summary": "Tag the user in the photo",
+      "description": "Tag the user in the photo",
       "consumes": ["application/json"],
       "parameters": [
         {
@@ -14,32 +14,40 @@
           "schema": {
             "type": "object",
             "properties": {
-              "login": {
+              "photoId": {
                 "type": "string",
-                "example": "byht"
+                "description": "unique photo ID",
+                "example": "b6aa1eff-6f05-4531-ab9c-12c63db20279"
               },
-              "password": {
+              "userId": {
                 "type": "string",
-                "example": "111111111"
+                "description": "the unique identifier of the user you want to mark",
+                "example": "b6aa1eff-6f05-4531-ab9c-12c63db20279"
               }
             },
-            "required": ["login", "password"]
+            "required": ["photoId", "userId"]
           }
         }
       ],
       "responses": {
         "200": {
-          "description": "Photographers data",
+          "description": "Album created",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/photographersUserCurrentResponse"
+                "$ref": "#/components/schemas/albumCreate"
               }
             }
           }
         },
         "500": {
           "description": "Server error"
+        },
+        "404": {
+          "description": "Photo is not exit"
+        },
+        "403": {
+          "description": "Not authorized"
         },
         "400": {
           "description": "Bad Request"

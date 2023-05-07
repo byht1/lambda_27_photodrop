@@ -2,6 +2,7 @@ import { createError } from 'helpers/error/createError';
 import { AlbumService } from './album.service';
 import {
   IAlbumController,
+  TAddPersonRoutFn,
   TAddPhotosToAlbumRoutFn,
   TCreateAlbumRoutFn,
   TGetAlbumsRoutFn,
@@ -44,8 +45,18 @@ export class AlbumController implements IAlbumController {
     const user = req.user;
     if (!user) throw createError(500);
 
-    const data = await this.photosService.getPhotosForAlbum(user.id, albumId);
+    const photos = await this.photosService.getPhotosForAlbum(user.id, albumId);
 
-    return res.json(data);
+    return res.json(photos);
+  };
+
+  addPerson: TAddPersonRoutFn = async (req, res) => {
+    const { photoId, userId } = req.body;
+    const user = req.user;
+    if (!user) throw createError(500);
+
+    const photo = await this.photosService.addPerson(photoId, userId, user.id);
+
+    return res.json(photo);
   };
 }

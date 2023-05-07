@@ -1,6 +1,5 @@
 import cors from 'cors';
 import express from 'express';
-import cookieParser from 'cookie-parser';
 import { getEnv } from 'helpers';
 import { albumRouter, authRouter } from 'modules';
 import morgan from 'morgan';
@@ -13,7 +12,6 @@ const app = express();
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
 
 app.use(morgan(formatsLogger));
-app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 

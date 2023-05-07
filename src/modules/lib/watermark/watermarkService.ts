@@ -7,7 +7,7 @@ import { getEnv } from 'helpers';
 
 export class WatermarkService {
   private WATERMARK_SIZE = getEnv('WATERMARK_SIZE', '0.9');
-  private watermarkPhoto = pathJoin(__dirname, './watermarkPhotoDrop.png');
+  private watermarkPhoto = pathJoin(__dirname, '../../../../watermarkPhotoDrop.png');
   private watermarkDir = pathJoin(__dirname, `../../../temporary/watermark`);
 
   applyWatermark = async (originalPhoto: string) => {
@@ -45,11 +45,9 @@ export class WatermarkService {
           gravity: 'center', // Розміщуємо в лівому нижньому куті
         },
       ])
-      .toFile(newFilePath, (err, info) => {
+      .toFile(newFilePath, err => {
         if (err) {
           console.error(err);
-        } else {
-          console.log(info);
         }
       });
 

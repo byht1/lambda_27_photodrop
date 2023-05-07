@@ -3,6 +3,7 @@ import { TCreateAlbumData } from './dto/createAlbum.dto';
 import { TGetAllResponse } from 'db/repository/albums/type';
 import { TPhotos } from 'db/schema/photos.schema';
 import { TGetAllPhotosAlbum } from 'db/repository/photos/type';
+import { TAddPersonDto } from './dto/addPerson.dto';
 
 //____________CONTROLLER_________
 export interface IAlbumController {
@@ -10,12 +11,14 @@ export interface IAlbumController {
   getAlbums: TGetAlbumsRoutFn;
   addPhotosToAlbum: TAddPhotosToAlbumRoutFn;
   getPhotosForAlbum: TGetPhotosForAlbumRoutFn;
+  addPerson: TAddPersonRoutFn;
 }
 
 export type TCreateAlbumRoutFn = TRouterFn<TAlbums, TCreateAlbumData>;
 export type TGetAlbumsRoutFn = TRouterFn<TGetAllResponse, void, void, TPaginationParamsRequest>;
 export type TAddPhotosToAlbumRoutFn = TRouterFn<TPhotos[], void, TParamsAlbumId>;
 export type TGetPhotosForAlbumRoutFn = TRouterFn<TGetAllPhotosAlbum[], void, TParamsAlbumId>;
+export type TAddPersonRoutFn = TRouterFn<TGetAllPhotosAlbum, TAddPersonDto, void>;
 
 export type TPaginationParamsRequest = { limit: number; page: number };
 export type TParamsAlbumId = { albumId: string };
@@ -34,6 +37,7 @@ export type TGetAlbumsFn = (params: TPaginationParamsRequest) => Promise<TGetAll
 export interface IPhotoService {
   addPhotosToAlbum: TAddPhotosToAlbumFn;
   getPhotosForAlbum: TGetPhotosForAlbumFn;
+  addPerson: TAddPersonFn;
 }
 
 export type TAddPhotosToAlbumFn = (
@@ -44,3 +48,8 @@ export type TGetPhotosForAlbumFn = (
   userId: string,
   albumId: string
 ) => Promise<TGetAllPhotosAlbum[]>;
+export type TAddPersonFn = (
+  photoId: string,
+  userId: string,
+  photographersId: string
+) => Promise<TGetAllPhotosAlbum>;

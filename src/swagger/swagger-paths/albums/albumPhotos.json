@@ -1,0 +1,99 @@
+{
+  "/api/albums/${albumId}/photos": {
+    "post": {
+      "tags": ["Albums"],
+      "summary": "Add photo to album",
+      "description": "Add photo to album",
+      "consumes": ["application/json"],
+      "parameters": [
+        { "$ref": "#/components/schemas/auth" },
+        {
+          "name": "albumId",
+          "in": "path",
+          "description": "Album ID",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        {
+          "name": "photos",
+          "in": "formData",
+          "description": "Photo files",
+          "required": true,
+          "type": "file"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Photo successfully added",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/photos" }
+              }
+            }
+          }
+        },
+        "503": {
+          "description": "Error uploading file to the cloud. Please try again later."
+        },
+        "500": {
+          "description": "Server error"
+        },
+        "404": {
+          "description": "Album is not exit"
+        },
+        "403": {
+          "description": "Not authorized"
+        },
+        "400": {
+          "description": "Bad Request"
+        }
+      }
+    },
+    "get": {
+      "tags": ["Albums"],
+      "summary": "Photo for the album",
+      "description": "Photo for the album",
+      "consumes": ["application/json"],
+      "parameters": [
+        { "$ref": "#/components/schemas/auth" },
+        {
+          "name": "albumId",
+          "in": "path",
+          "description": "Album ID",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Album created",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/photos" }
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Server error"
+        },
+        "403": {
+          "description": "Not authorized"
+        },
+        "404": {
+          "description": "Album is not exit"
+        }
+      }
+    }
+  }
+}

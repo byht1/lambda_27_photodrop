@@ -2,7 +2,7 @@ import { readdir, unlink } from 'fs';
 import { join as pathJoin } from 'path';
 import { S3Service } from 'AWS';
 import { readFileSync } from 'fs';
-import { IPhotoService, TAddPhotosToAlbumFn, TGetPhotosForAlbumFn } from './type';
+import { IPhotoService, TAddPersonFn, TAddPhotosToAlbumFn, TGetPhotosForAlbumFn } from './type';
 import { WatermarkService } from 'modules/lib';
 import { AlbumsRepository, PhotosRepository } from 'db/repository';
 import { createError } from 'helpers/error/createError';
@@ -21,7 +21,7 @@ export class PhotosService implements IPhotoService {
   addPhotosToAlbum: TAddPhotosToAlbumFn = async (files, albumId) => {
     try {
       const album = await this.albumsModel.getById(albumId);
-      if (!album) throw createError(400, 'Album with this ID does not exist');
+      if (!album) throw createError(404, 'Album is not exit');
       const { name: albumName } = album;
 
       const photos = files.map(file => ({
@@ -48,7 +48,7 @@ export class PhotosService implements IPhotoService {
         albumId,
         url,
         originalUrl: original[i],
-        name: `${albumName} photo №${i}`,
+        name: `${albumName} photo №${i + 1}`,
       }));
 
       const photoDataResponse = await this.photosModel.addPhotos(processedData);
@@ -65,8 +65,18 @@ export class PhotosService implements IPhotoService {
   getPhotosForAlbum: TGetPhotosForAlbumFn = async (userId, albumId) => {
     const isOwnerAlbum = await this.albumsModel.hasAlbumForUser(userId, albumId);
     const photos = await this.photosModel.getAll(albumId, isOwnerAlbum);
+    if (!photos[0]) throw createError(404, 'Album is not exit');
 
     return photos;
+  };
+
+  addPerson: TAddPersonFn = async (photoId, userId, photographersId) => {
+    const isPhoto = await this.photosModel.getById(photoId);
+    if (!isPhoto) throw createError(404, 'Photo is not exit');
+    const isOwnerAlbum = await this.albumsModel.hasAlbumForUser(photographersId, isPhoto.albumId);
+    const photo = await this.photosModel.addPerson(photoId, userId, isOwnerAlbum);
+
+    return photo;
   };
 
   private clearDirectory = (dir: 'original' | 'watermark') => {
