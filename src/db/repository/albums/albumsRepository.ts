@@ -35,6 +35,6 @@ export class AlbumsRepository extends AlbumsOfPhotographersRepository implements
     const { id } = this.table;
     const album = await this.db.select().from(this.table).where(eq(id, searchId));
 
-    return album.at(0);
+    return album[0];
   };
 }

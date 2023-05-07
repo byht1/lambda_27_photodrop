@@ -20,7 +20,7 @@ export class PhotographersRepository implements IPhotographersRepository {
       .from(this.table)
       .where(eq(login, searchLogin));
 
-    return user.at(0);
+    return user[0];
   };
 
   tokenUpdate: TTokenUpdateFn = async (userId, newToken) => {

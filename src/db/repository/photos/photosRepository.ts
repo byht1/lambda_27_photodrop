@@ -30,7 +30,7 @@ export class PhotosRepository implements IPhotosRepository {
     const { id } = this.table;
     const photo = await this.db.select().from(this.table).where(eq(id, searchPhotoId));
 
-    return photo.at(0);
+    return photo[0];
   };
 
   addPerson: TAddPersonFn = async (searchPhotoId, userId, isOwner) => {

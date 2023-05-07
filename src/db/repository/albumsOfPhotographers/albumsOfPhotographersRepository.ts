@@ -13,7 +13,7 @@ export class AlbumsOfPhotographersRepository implements IAlbumsOfPhotographersRe
       .from(this.columns)
       .where(and(eq(photographersId, userId), eq(albumId, searchAlbumId)));
 
-    return !!data.at(0);
+    return !!data[0];
   };
 
   protected addNewAlbum: TAddNewAlbumFn = async (photographersId, albumId) => {
