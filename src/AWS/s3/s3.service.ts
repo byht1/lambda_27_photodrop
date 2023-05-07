@@ -1,4 +1,4 @@
-import * as AWS from 'aws-sdk';
+import { S3 } from 'aws-sdk';
 import { getEnv } from 'helpers';
 import { IS3Service, TUploadFilesFn, TGenerateParamsS3Fn, TAcl, TUploadToS3Fn } from './type';
 import { createError } from 'helpers/error/createError';
@@ -11,7 +11,7 @@ export enum ERootFolder {
 export class S3Service implements IS3Service {
   private AWS_S3_BUCKET = getEnv('AWS_S3_BUCKET');
 
-  private s3 = new AWS.S3({
+  private s3 = new S3({
     accessKeyId: getEnv('AWS_S3_ACCESS_KEY'),
     secretAccessKey: getEnv('AWS_S3_KEY_SECRET'),
     signatureVersion: 'v4',

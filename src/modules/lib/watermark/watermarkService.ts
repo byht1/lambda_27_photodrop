@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
 import { join as pathJoin } from 'path';
-import { readFileSync } from 'fs';
 import mime from 'mime';
 import sharp from 'sharp';
 import { getEnv } from 'helpers';
