@@ -22,6 +22,7 @@ export class AuthService implements IAuthService {
 
       return { id: user.id, token };
     } catch (error) {
+      console.log('🚀  AuthService  error:', error);
       throw createError(503);
     }
   };
