@@ -1,5 +1,5 @@
 {
-  "/api/album/photos/person": {
+  "/api/albums/photos/person": {
     "post": {
       "tags": ["Albums"],
       "summary": "Tag the user in the photo",
