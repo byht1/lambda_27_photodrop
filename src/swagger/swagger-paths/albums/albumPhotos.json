@@ -56,8 +56,8 @@
     },
     "get": {
       "tags": ["Albums"],
-      "summary": "Photo for the album",
-      "description": "Photo for the album",
+      "summary": "Get photo for the album",
+      "description": "Get photo for the album",
       "consumes": ["application/json"],
       "parameters": [
         { "$ref": "#/components/schemas/auth" },
@@ -74,7 +74,7 @@
       ],
       "responses": {
         "200": {
-          "description": "Album created",
+          "description": "Photos",
           "content": {
             "application/json": {
               "schema": {

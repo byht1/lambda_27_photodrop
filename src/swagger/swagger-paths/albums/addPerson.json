@@ -31,11 +31,11 @@
       ],
       "responses": {
         "200": {
-          "description": "Album created",
+          "description": "Photo",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/albumCreate"
+                "$ref": "#/components/schemas/photos"
               }
             }
           }
