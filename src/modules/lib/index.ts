@@ -1,2 +1,4 @@
 export * from './token/token.service';
-export * from './watermark/watermarkService';
+
+export * from './photos/PhotoService';
+export { TFileResponse } from './photos/type';

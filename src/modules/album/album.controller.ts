@@ -1,5 +1,5 @@
-import { createError } from 'helpers/error/createError';
-import { AlbumService } from './album.service';
+import { createError } from 'helpers/error/createError'
+import { AlbumService } from './album.service'
 import {
   IAlbumController,
   TAddPersonRoutFn,
@@ -7,8 +7,8 @@ import {
   TCreateAlbumRoutFn,
   TGetAlbumsRoutFn,
   TGetPhotosForAlbumRoutFn,
-} from './type';
-import { PhotosService } from './photos.service';
+} from './type'
+import { PhotosService } from './photos.service'
 
 export class AlbumController implements IAlbumController {
   constructor(
@@ -17,46 +17,52 @@ export class AlbumController implements IAlbumController {
   ) {}
 
   createAlbum: TCreateAlbumRoutFn = async (req, res) => {
-    const albumDataCreate = req.body;
-    const user = req.user;
-    if (!user) throw createError(500);
-    const newAlbum = await this.albumService.createAlbum(user.id, albumDataCreate);
-    return res.json(newAlbum);
-  };
+    const albumDataCreate = req.body
+    const user = req.user
+    if (!user) throw createError(500)
+    const newAlbum = await this.albumService.createAlbum(user.id, albumDataCreate)
+    return res.json(newAlbum)
+  }
 
   getAlbums: TGetAlbumsRoutFn = async (req, res) => {
-    const queryParams = req.query;
-    const albums = await this.albumService.getAlbums(queryParams);
+    const queryParams = req.query
+    const albums = await this.albumService.getAlbums(queryParams)
 
-    return res.json(albums);
-  };
+    return res.json(albums)
+  }
 
   addPhotosToAlbum: TAddPhotosToAlbumRoutFn = async (req, res) => {
-    const { albumId } = req.params;
-    const files = req.files as Express.Multer.File[];
+    const { albumId } = req.params
+    try {
+      const files = req.files as Express.Multer.File[]
 
-    const photos = await this.photosService.addPhotosToAlbum(files, albumId);
+      const photos = await this.photosService.addPhotosToAlbum(files, albumId)
 
-    return res.json(photos);
-  };
+      return res.json(photos)
+    } catch (error) {
+      throw error
+    } finally {
+      this.photosService.clearDirectory(albumId)
+    }
+  }
 
   getPhotosForAlbum: TGetPhotosForAlbumRoutFn = async (req, res) => {
-    const { albumId } = req.params;
-    const user = req.user;
-    if (!user) throw createError(500);
+    const { albumId } = req.params
+    const user = req.user
+    if (!user) throw createError(500)
 
-    const photos = await this.photosService.getPhotosForAlbum(user.id, albumId);
+    const photos = await this.photosService.getPhotosForAlbum(user.id, albumId)
 
-    return res.json(photos);
-  };
+    return res.json(photos)
+  }
 
   addPerson: TAddPersonRoutFn = async (req, res) => {
-    const { photoId, userId } = req.body;
-    const user = req.user;
-    if (!user) throw createError(500);
+    const { photoId, userId } = req.body
+    const user = req.user
+    if (!user) throw createError(500)
 
-    const photo = await this.photosService.addPerson(photoId, userId, user.id);
+    const photo = await this.photosService.addPerson(photoId, userId, user.id)
 
-    return res.json(photo);
-  };
+    return res.json(photo)
+  }
 }

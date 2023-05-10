@@ -11,6 +11,7 @@
     "prod": "npm run build && npm run start",
     "dk-generate": "drizzle-kit generate:pg",
     "dk-up": "drizzle-kit up:pg",
+    "dk-drop": "drizzle-kit drop",
     "dk-deploy": "ts-node --require tsconfig-paths/register drizzle/deploy.ts"
   },
   "keywords": [],

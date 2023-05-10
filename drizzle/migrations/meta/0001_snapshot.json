@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "b08e6618-67c0-437c-8a11-1a28d6139b07",
+  "id": "9efebfdc-dc4a-4518-9cc1-7ef3541d5ff4",
   "prevId": "2cd019b3-5de0-443b-b01e-df5be8492ca6",
   "tables": {
     "albums": {
@@ -225,15 +225,27 @@
           "notNull": false,
           "default": []
         },
-        "url": {
-          "name": "url",
+        "original_resized_url": {
+          "name": "original_resized_url",
           "type": "varchar",
           "primaryKey": false,
           "notNull": true
         },
-        "created_at": {
-          "name": "created_at",
-          "type": "varchar(25)",
+        "watermark_resized_url": {
+          "name": "watermark_resized_url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "original_url": {
+          "name": "original_url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "watermark_url": {
+          "name": "watermark_url",
+          "type": "varchar",
           "primaryKey": false,
           "notNull": true
         }

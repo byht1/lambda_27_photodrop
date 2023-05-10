@@ -12,15 +12,8 @@
     {
       "idx": 1,
       "version": "5",
-      "when": 1683216859369,
-      "tag": "0001_boring_blue_marvel",
-      "breakpoints": false
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1683401394498,
-      "tag": "0002_blue_morgan_stark",
+      "when": 1683742769592,
+      "tag": "0001_parched_thunderbird",
       "breakpoints": false
     }
   ]
