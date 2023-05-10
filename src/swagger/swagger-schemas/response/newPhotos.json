@@ -1,5 +1,5 @@
 {
-  "photos": {
+  "newPhotos": {
     "type": "object",
     "properties": {
       "id": {
@@ -21,11 +21,19 @@
           "example": "b6aa1eff-6f05-4531-ab9c-12c63db20279"
         }
       },
-      "largePhotoURL": {
+      "originalResizedUrl": {
         "type": "string",
         "example": "https://photo-drop-ambda.s3.amazonaws.com/watermark/290b3489-e22c-4f06-be85-07ca9d5d62dc/cb7fec06-f66b-4e95-83da-82214a244a83.png"
       },
-      "smallPhotoURL": {
+      "watermarkResizedUrl": {
+        "type": "string",
+        "example": "https://photo-drop-ambda.s3.amazonaws.com/watermark/290b3489-e22c-4f06-be85-07ca9d5d62dc/cb7fec06-f66b-4e95-83da-82214a244a83.png"
+      },
+      "originalUrl": {
+        "type": "string",
+        "example": "https://photo-drop-ambda.s3.amazonaws.com/watermark/290b3489-e22c-4f06-be85-07ca9d5d62dc/cb7fec06-f66b-4e95-83da-82214a244a83.png"
+      },
+      "watermarkUrl": {
         "type": "string",
         "example": "https://photo-drop-ambda.s3.amazonaws.com/watermark/290b3489-e22c-4f06-be85-07ca9d5d62dc/cb7fec06-f66b-4e95-83da-82214a244a83.png"
       }

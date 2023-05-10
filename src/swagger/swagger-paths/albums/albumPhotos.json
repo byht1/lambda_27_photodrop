@@ -32,7 +32,7 @@
             "application/json": {
               "schema": {
                 "type": "array",
-                "items": { "$ref": "#/components/schemas/photos" }
+                "items": { "$ref": "#/components/schemas/newPhotos" }
               }
             }
           }
