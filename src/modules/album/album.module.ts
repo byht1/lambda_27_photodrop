@@ -1,41 +1,47 @@
-import express from 'express';
-import { ctrlWrapper } from 'helpers';
-import { AlbumController } from './album.controller';
-import { uploadFiles, validate, validateToken } from 'middleware';
-import { newAlbumDto } from './dto/createAlbum.dto';
-import { paginationDto } from 'modules/dto/pagination.dto';
-import { addPersonDto } from './dto/addPerson.dto';
+import express from 'express'
+import { ctrlWrapper } from 'helpers'
+import { validate, validateToken } from 'middleware'
+import { paginationDto } from 'modules/dto/pagination.dto'
+import { albumIdSchema } from 'modules/dto/uuidValidate.dto'
+import { addPersonDto, addPhotosDto, newAlbumDto } from './dto'
+import { AlbumController } from './album.controller'
 
-const router = express.Router();
-const breakpointName = 'album';
+const router = express.Router()
+const breakpointName = 'album'
 
 const { createAlbum, getAlbums, addPhotosToAlbum, getPhotosForAlbum, addPerson } =
-  new AlbumController();
+  new AlbumController()
 
 router.post(
   `/${breakpointName}`,
   validateToken,
   validate(newAlbumDto, 'body'),
   ctrlWrapper(createAlbum)
-);
+)
 router.get(
   `/${breakpointName}`,
   validateToken,
   validate(paginationDto, 'query'),
   ctrlWrapper(getAlbums)
-);
-router.post<'/album/:albumId/photos', any>(
+)
+router.post(
   `/${breakpointName}/:albumId/photos`,
   validateToken,
-  uploadFiles,
+  validate(addPhotosDto, 'body'),
+  validate(albumIdSchema, 'params'),
   ctrlWrapper(addPhotosToAlbum)
-);
-router.get(`/${breakpointName}/:albumId/photos`, validateToken, ctrlWrapper(getPhotosForAlbum));
+)
+router.get(
+  `/${breakpointName}/:albumId/photos`,
+  validateToken,
+  validate(albumIdSchema, 'params'),
+  ctrlWrapper(getPhotosForAlbum)
+)
 router.post(
   `/${breakpointName}/photos/person`,
   validateToken,
   validate(addPersonDto, 'body'),
   ctrlWrapper(addPerson)
-);
+)
 
-export const albumRouter = router;
+export const albumRouter = router

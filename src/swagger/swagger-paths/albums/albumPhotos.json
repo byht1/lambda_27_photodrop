@@ -18,11 +18,23 @@
           }
         },
         {
-          "name": "photos",
-          "in": "formData",
-          "description": "Photo files",
+          "in": "body",
+          "name": "body",
+          "description": "JSON-body request",
           "required": true,
-          "type": "file"
+          "schema": {
+            "type": "object",
+            "properties": {
+              "photos": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "example": "filename.png"
+                }
+              }
+            },
+            "required": ["photos"]
+          }
         }
       ],
       "responses": {

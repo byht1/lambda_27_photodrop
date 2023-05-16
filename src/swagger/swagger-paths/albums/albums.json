@@ -6,6 +6,7 @@
       "description": "Create a new album",
       "consumes": ["application/json"],
       "parameters": [
+        { "$ref": "#/components/schemas/auth" },
         {
           "in": "body",
           "name": "body",
@@ -59,6 +60,7 @@
       "description": "Get all albums",
       "consumes": ["application/json"],
       "parameters": [
+        { "$ref": "#/components/schemas/auth" },
         { "$ref": "#/components/schemas/QueryPage" },
         { "$ref": "#/components/schemas/QueryLimit" }
       ],

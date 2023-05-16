@@ -1,10 +1,8 @@
 import { TAlbums } from 'db/schema'
 import { TCreateAlbumData } from './dto/createAlbum.dto'
 import { TGetAllResponse } from 'db/repository/albums/type'
-import { TPhotos } from 'db/schema/photos.schema'
 import { TGetAllPhotosAlbum } from 'db/repository/photos/type'
-import { TAddPersonDto } from './dto/addPerson.dto'
-import { TFileResponse } from 'modules/lib'
+import { TAddPersonDto, TAddPhotosDto } from './dto'
 
 //____________CONTROLLER_________
 export interface IAlbumController {
@@ -17,7 +15,7 @@ export interface IAlbumController {
 
 export type TCreateAlbumRoutFn = TRouterFn<TAlbums, TCreateAlbumData>
 export type TGetAlbumsRoutFn = TRouterFn<TGetAllResponse, void, void, TPaginationParamsRequest>
-export type TAddPhotosToAlbumRoutFn = TRouterFn<TPhotos[], void, TParamsAlbumId>
+export type TAddPhotosToAlbumRoutFn = TRouterFn<string[], TAddPhotosDto, TParamsAlbumId>
 export type TGetPhotosForAlbumRoutFn = TRouterFn<TGetAllPhotosAlbum[], void, TParamsAlbumId>
 export type TAddPersonRoutFn = TRouterFn<TGetAllPhotosAlbum, TAddPersonDto, void>
 
@@ -41,10 +39,7 @@ export interface IPhotoService {
   addPerson: TAddPersonFn
 }
 
-export type TAddPhotosToAlbumFn = (
-  files: Express.Multer.File[],
-  albumId: string
-) => Promise<TPhotos[]>
+export type TAddPhotosToAlbumFn = (files: string[], albumId: string) => Promise<string[]>
 export type TGetPhotosForAlbumFn = (
   userId: string,
   albumId: string
@@ -54,7 +49,3 @@ export type TAddPersonFn = (
   userId: string,
   photographersId: string
 ) => Promise<TGetAllPhotosAlbum>
-
-export type TStringFileResponse = {
-  [K in keyof TFileResponse]: string
-}

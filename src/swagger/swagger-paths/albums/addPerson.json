@@ -6,6 +6,7 @@
       "description": "Tag the user in the photo",
       "consumes": ["application/json"],
       "parameters": [
+        { "$ref": "#/components/schemas/auth" },
         {
           "in": "body",
           "name": "body",

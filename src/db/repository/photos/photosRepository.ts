@@ -1,15 +1,10 @@
-import { photos } from 'db/schema/photos.schema'
-import { IPhotosRepository, TAddPersonFn, TAddPhotosFn, TGetAllFn, TGetBuIdFn } from './type'
-import { getDrizzle } from 'db/connectDB'
 import { eq, sql } from 'drizzle-orm'
+import { getDrizzle } from 'db/connectDB'
+import { photos } from 'db/schema/photos.schema'
+import { IPhotosRepository, TAddPersonFn, TGetAllFn, TGetBuIdFn, TMaxPhotosToAlbumFn } from './type'
 
 export class PhotosRepository implements IPhotosRepository {
   constructor(private db = getDrizzle(), private table = photos) {}
-
-  addPhotos: TAddPhotosFn = async newPhotos => {
-    const newPhotosResponse = await this.db.insert(this.table).values(newPhotos).returning()
-    return newPhotosResponse
-  }
 
   getAll: TGetAllFn = async (searchAlbumId, isOwner) => {
     const { albumId, id, name, people } = this.table
@@ -27,7 +22,7 @@ export class PhotosRepository implements IPhotosRepository {
     return photosForAlbum
   }
 
-  getById: TGetBuIdFn = async searchPhotoId => {
+  getById: TGetBuIdFn = async (searchPhotoId) => {
     const { id } = this.table
     const photo = await this.db.select().from(this.table).where(eq(id, searchPhotoId))
 
@@ -44,6 +39,16 @@ export class PhotosRepository implements IPhotosRepository {
       .returning({ id, name, people, ...URLs })
 
     return photo[0]
+  }
+
+  maxPhotosToAlbum: TMaxPhotosToAlbumFn = async (searchAlbumId) => {
+    const { albumId } = this.table
+    const [maxDBElements] = await this.db
+      .select({ count: sql<number>`count(*)`.mapWith((it) => +it) })
+      .from(this.table)
+      .where(eq(albumId, searchAlbumId))
+
+    return maxDBElements.count
   }
 
   private isAlbumOwner = (isOwner: boolean) => {

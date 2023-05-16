@@ -33,17 +33,11 @@ export class AlbumController implements IAlbumController {
 
   addPhotosToAlbum: TAddPhotosToAlbumRoutFn = async (req, res) => {
     const { albumId } = req.params
-    try {
-      const files = req.files as Express.Multer.File[]
+    const { photos } = req.body
 
-      const photos = await this.photosService.addPhotosToAlbum(files, albumId)
+    const presignedURLs = await this.photosService.addPhotosToAlbum(photos, albumId)
 
-      return res.json(photos)
-    } catch (error) {
-      throw error
-    } finally {
-      this.photosService.clearDirectory(albumId)
-    }
+    return res.json(presignedURLs)
   }
 
   getPhotosForAlbum: TGetPhotosForAlbumRoutFn = async (req, res) => {
