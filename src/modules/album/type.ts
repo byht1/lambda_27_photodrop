@@ -6,6 +6,7 @@ import { TAddPersonDto, TAddPhotosDto } from './dto'
 
 //____________CONTROLLER_________
 export interface IAlbumController {
+  readonly breakpointName: string
   createAlbum: TCreateAlbumRoutFn
   getAlbums: TGetAlbumsRoutFn
   addPhotosToAlbum: TAddPhotosToAlbumRoutFn

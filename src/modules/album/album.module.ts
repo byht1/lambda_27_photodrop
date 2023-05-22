@@ -7,9 +7,8 @@ import { addPersonDto, addPhotosDto, newAlbumDto } from './dto'
 import { AlbumController } from './album.controller'
 
 const router = express.Router()
-const breakpointName = 'album'
 
-const { createAlbum, getAlbums, addPhotosToAlbum, getPhotosForAlbum, addPerson } =
+const { breakpointName, createAlbum, getAlbums, addPhotosToAlbum, getPhotosForAlbum, addPerson } =
   new AlbumController()
 
 router.post(

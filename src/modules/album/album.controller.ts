@@ -11,10 +11,9 @@ import {
 import { PhotosService } from './photos.service'
 
 export class AlbumController implements IAlbumController {
-  constructor(
-    private albumService: AlbumService = new AlbumService(),
-    private photosService: PhotosService = new PhotosService()
-  ) {}
+  public breakpointName: string = 'albums'
+  private albumService = new AlbumService()
+  private photosService = new PhotosService()
 
   createAlbum: TCreateAlbumRoutFn = async (req, res) => {
     const albumDataCreate = req.body

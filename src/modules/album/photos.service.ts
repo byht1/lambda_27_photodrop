@@ -6,12 +6,9 @@ import { AlbumsRepository, PhotosRepository } from 'db/repository'
 import { createError } from 'helpers/error/createError'
 
 export class PhotosService implements IPhotoService {
-  private pathTemporaryDir = pathJoin(__dirname, '../../temporary')
-  constructor(
-    private s3Service: S3Service = new S3Service(),
-    private albumsModel: AlbumsRepository = new AlbumsRepository(),
-    private photosModel: PhotosRepository = new PhotosRepository()
-  ) {}
+  private s3Service: S3Service = new S3Service()
+  private albumsModel: AlbumsRepository = new AlbumsRepository()
+  private photosModel: PhotosRepository = new PhotosRepository()
 
   addPhotosToAlbum: TAddPhotosToAlbumFn = async (files, albumId) => {
     const albumPromise = this.albumsModel.getById(albumId)
@@ -44,15 +41,5 @@ export class PhotosService implements IPhotoService {
     const photo = await this.photosModel.addPerson(photoId, userId, isOwnerAlbum)
 
     return photo
-  }
-
-  clearDirectory = (dir: string) => {
-    const directory = this.pathTemporaryDir + '/' + dir
-
-    rm(directory, { recursive: true }, (error) => {
-      if (error) {
-        console.error('Помилка під час видалення директорії:', error)
-      }
-    })
   }
 }
