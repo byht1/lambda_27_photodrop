@@ -1,5 +1,3 @@
-import { rm } from 'fs'
-import { join as pathJoin } from 'path'
 import { S3Service } from 'AWS'
 import { IPhotoService, TAddPersonFn, TAddPhotosToAlbumFn, TGetPhotosForAlbumFn } from './type'
 import { AlbumsRepository, PhotosRepository } from 'db/repository'
