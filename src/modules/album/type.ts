@@ -3,6 +3,7 @@ import { TCreateAlbumData } from './dto/createAlbum.dto'
 import { TGetAllResponse } from 'db/repository/albums/type'
 import { TGetAllPhotosAlbum } from 'db/repository/photos/type'
 import { TAddPersonDto, TAddPhotosDto } from './dto'
+import { S3 } from 'aws-sdk'
 
 //____________CONTROLLER_________
 export interface IAlbumController {
@@ -16,7 +17,7 @@ export interface IAlbumController {
 
 export type TCreateAlbumRoutFn = TRouterFn<TAlbums, TCreateAlbumData>
 export type TGetAlbumsRoutFn = TRouterFn<TGetAllResponse, void, void, TPaginationParamsRequest>
-export type TAddPhotosToAlbumRoutFn = TRouterFn<string[], TAddPhotosDto, TParamsAlbumId>
+export type TAddPhotosToAlbumRoutFn = TRouterFn<S3.PresignedPost[], TAddPhotosDto, TParamsAlbumId>
 export type TGetPhotosForAlbumRoutFn = TRouterFn<TGetAllPhotosAlbum[], void, TParamsAlbumId>
 export type TAddPersonRoutFn = TRouterFn<TGetAllPhotosAlbum, TAddPersonDto, void>
 
@@ -40,7 +41,7 @@ export interface IPhotoService {
   addPerson: TAddPersonFn
 }
 
-export type TAddPhotosToAlbumFn = (files: string[], albumId: string) => Promise<string[]>
+export type TAddPhotosToAlbumFn = (files: string[], albumId: string) => Promise<S3.PresignedPost[]>
 export type TGetPhotosForAlbumFn = (
   userId: string,
   albumId: string

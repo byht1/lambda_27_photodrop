@@ -45,8 +45,46 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "type": "string",
-                  "example": "https://photo-drop-ambda.s3.amazonaws.com/watermark/290b3489-e22c-4f06-be85-07ca9d5d62dc/cb7fec06-f66b-4e95-83da-82214a244a83.png"
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "example": "https://s3.eu-central-1.amazonaws.com/photo-drop-lambda"
+                    },
+                    "fields": {
+                      "type": "object",
+                      "properties": {
+                        "Key": {
+                          "type": "string",
+                          "example": "albums/temp/4_b9e6bc5e-663e-4b03-bbc9-51df29291602.png"
+                        },
+                        "bucket": {
+                          "type": "string",
+                          "example": "photo-drop-lambda"
+                        },
+                        "X-Amz-Algorithm": {
+                          "type": "string",
+                          "example": "AWS4-HMAC-SHA256"
+                        },
+                        "X-Amz-Credential": {
+                          "type": "string",
+                          "example": "AKIAWBLIKOBWLVZUKKBB/20230523/eu-central-1/s3/aws4_request"
+                        },
+                        "X-Amz-Date": {
+                          "type": "string",
+                          "example": "20230523T064003Z"
+                        },
+                        "Policy": {
+                          "type": "string",
+                          "example": "eyJleHBpcmF0aW9uIjoiMjAyMy0wNS0yM1QxNjo0MDowM1oiLCJjb25kaXRpb25zIjpbeyJLZXkiOiJhbGJ1bXMvdGVtcC80X2I5ZTZiYzVlLTY2M2UtNGIwMy1iYmM5LTUxZGYyOTI5MTYwMi5wbmcifSx7ImJ1Y2tldCI6InBob3RvLWRyb3AtbGFtYmRhIn0seyJYLUFtei1BbGdvcml0aG0iOiJBV1M0LUhNQUMtU0hBMjU2In0seyJYLUFtei1DcmVkZW50aWFsIjoiQUtJQVdCTElLT0JXTFZaVUtLQkIvMjAyMzA1MjMvZXUtY2VudHJhbC0xL3MzL2F3czRfcmVxdWVzdCJ9LHsiWC1BbXotRGF0ZSI6IjIwMjMwNTIzVDA2NDAwM1oifV19"
+                        },
+                        "X-Amz-Signature": {
+                          "type": "string",
+                          "example": "c7ab7c60b709c8266f108ca658d0b94a6b7c0342b2547cf3575f87818a83eb52"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }

@@ -19,9 +19,11 @@ export class S3Service implements IS3Service {
   })
 
   generatePresignedUrl: TGeneratePresignedUrlFn = (pathToFile) => {
-    return this.s3.getSignedUrl('putObject', {
+    return this.s3.createPresignedPost({
       Bucket: this.AWS_S3_BUCKET,
-      Key: pathToFile,
+      Fields: {
+        Key: pathToFile,
+      },
       Expires: 36000,
     })
   }

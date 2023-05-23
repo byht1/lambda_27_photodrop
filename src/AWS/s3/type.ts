@@ -1,8 +1,7 @@
-import { ERootFolder } from './s3.service'
+import { S3 } from 'aws-sdk'
 
 export interface IS3Service {
   generatePresignedUrl: TGeneratePresignedUrlFn
-  //   originalUploadFiles: TOriginalUploadFilesFn;
 }
 
-export type TGeneratePresignedUrlFn = (pathToFile: string) => string
+export type TGeneratePresignedUrlFn = (pathToFile: string) => S3.PresignedPost
