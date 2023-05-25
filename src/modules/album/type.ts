@@ -48,6 +48,6 @@ export type TGetPhotosForAlbumFn = (
 ) => Promise<TGetAllPhotosAlbum[]>
 export type TAddPersonFn = (
   photoId: string,
-  userId: string,
+  phoneNumbers: string[],
   photographersId: string
 ) => Promise<TGetAllPhotosAlbum>

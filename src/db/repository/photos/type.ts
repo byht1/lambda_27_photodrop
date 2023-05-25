@@ -11,7 +11,7 @@ export type TGetAllFn = (albumId: string, isOwner: boolean) => Promise<TGetAllPh
 export type TGetBuIdFn = (photoId: string) => Promise<TPhotos | undefined>
 export type TAddPersonFn = (
   photoId: string,
-  userId: string,
+  phoneNumbers: string[],
   isOwner: boolean
 ) => Promise<TGetAllPhotosAlbum>
 export type TMaxPhotosToAlbumFn = (userId: string) => Promise<number>

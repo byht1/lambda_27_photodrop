@@ -50,11 +50,11 @@ export class AlbumController implements IAlbumController {
   }
 
   addPerson: TAddPersonRoutFn = async (req, res) => {
-    const { photoId, userId } = req.body
+    const { photoId, phoneNumbers } = req.body
     const user = req.user
     if (!user) throw createError(500)
 
-    const photo = await this.photosService.addPerson(photoId, userId, user.id)
+    const photo = await this.photosService.addPerson(photoId, phoneNumbers, user.id)
 
     return res.json(photo)
   }

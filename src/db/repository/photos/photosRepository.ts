@@ -2,6 +2,7 @@ import { eq, sql } from 'drizzle-orm'
 import { getDrizzle } from 'db/connectDB'
 import { photos } from 'db/schema/photos.schema'
 import { IPhotosRepository, TAddPersonFn, TGetAllFn, TGetBuIdFn, TMaxPhotosToAlbumFn } from './type'
+import { arrayCat } from '../helpers'
 
 export class PhotosRepository implements IPhotosRepository {
   constructor(private db = getDrizzle(), private table = photos) {}
@@ -29,12 +30,14 @@ export class PhotosRepository implements IPhotosRepository {
     return photo[0]
   }
 
-  addPerson: TAddPersonFn = async (searchPhotoId, userId, isOwner) => {
+  addPerson: TAddPersonFn = async (searchPhotoId, phoneNumbers, isOwner) => {
     const { id, name, people } = this.table
     const URLs = this.isAlbumOwner(isOwner)
     const photo = await this.db
       .update(this.table)
-      .set({ people: sql<string[]>`array_append(${people}, ${userId})` })
+      .set({
+        people: arrayCat(people, phoneNumbers),
+      })
       .where(eq(id, searchPhotoId))
       .returning({ id, name, people, ...URLs })
 
