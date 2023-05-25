@@ -20,13 +20,15 @@
                 "description": "unique photo ID",
                 "example": "b6aa1eff-6f05-4531-ab9c-12c63db20279"
               },
-              "userId": {
-                "type": "string",
-                "description": "the unique identifier of the user you want to mark",
-                "example": "b6aa1eff-6f05-4531-ab9c-12c63db20279"
+              "phoneNumbers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "+380678624587"
+                }
               }
             },
-            "required": ["photoId", "userId"]
+            "required": ["photoId", "phoneNumbers"]
           }
         }
       ],
