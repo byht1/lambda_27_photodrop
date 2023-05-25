@@ -14,12 +14,15 @@ export class PhotosService implements IPhotoService {
 
     const [album, countPhotos] = await Promise.all([albumPromise, countPhotosPromise])
     if (!album) throw createError(404, 'Album is not exist')
+    const { counterPhoto } = album
 
     const URLs = files.map((filename, i) => {
       const [expansion] = filename.split('.').reverse()
-      const path = `albums/temp/${countPhotos + i + 1}_${albumId}.${expansion}`
+      const path = `albums/temp/${counterPhoto + 1}_${albumId}.${expansion}`
       return this.s3Service.generatePresignedUrl(path)
     })
+
+    await this.albumsModel.updateCount(albumId)
 
     return URLs
   }
