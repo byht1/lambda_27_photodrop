@@ -9,14 +9,11 @@ export class PhotosService implements IPhotoService {
   private photosModel: PhotosRepository = new PhotosRepository()
 
   addPhotosToAlbum: TAddPhotosToAlbumFn = async (files, albumId) => {
-    const albumPromise = this.albumsModel.getById(albumId)
-    const countPhotosPromise = this.photosModel.maxPhotosToAlbum(albumId)
-
-    const [album, countPhotos] = await Promise.all([albumPromise, countPhotosPromise])
+    const album = await this.albumsModel.getById(albumId)
     if (!album) throw createError(404, 'Album is not exist')
     const { counterPhoto } = album
 
-    const URLs = files.map((filename, i) => {
+    const URLs = files.map((filename) => {
       const [expansion] = filename.split('.').reverse()
       const path = `albums/temp/${counterPhoto + 1}_${albumId}.${expansion}`
       return this.s3Service.generatePresignedUrl(path)
