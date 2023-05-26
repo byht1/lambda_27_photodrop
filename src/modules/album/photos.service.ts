@@ -2,6 +2,8 @@ import { S3Service } from 'AWS'
 import { IPhotoService, TAddPersonFn, TAddPhotosToAlbumFn, TGetPhotosForAlbumFn } from './type'
 import { AlbumsRepository, PhotosRepository } from 'db/repository'
 import { createError } from 'helpers/error/createError'
+import { v4 as uuidv4 } from 'uuid'
+import { TNewPhotos } from 'db/schema/photos.schema'
 
 export class PhotosService implements IPhotoService {
   private s3Service: S3Service = new S3Service()
@@ -13,13 +15,18 @@ export class PhotosService implements IPhotoService {
     if (!album) throw createError(404, 'Album is not exist')
     const { counterPhoto } = album
 
-    const URLs = files.map((filename) => {
+    const newPhotos: TNewPhotos[] = []
+
+    const URLs = files.map((filename, i) => {
       const [expansion] = filename.split('.').reverse()
-      const path = `albums/temp/${counterPhoto + 1}_${albumId}.${expansion}`
-      return this.s3Service.generatePresignedUrl(path)
+      const photoId = uuidv4()
+      const newPhoto: TNewPhotos = { id: photoId, albumId }
+      newPhotos.push(newPhoto)
+      const path = `albums/temp/${counterPhoto + 1 + i}_${albumId}_${photoId}.${expansion}`
+      return { photoId, ...this.s3Service.generatePresignedUrl(path) }
     })
 
-    await this.albumsModel.updateCount(albumId)
+    await Promise.all([this.albumsModel.updateCount(albumId), this.photosModel.addPhoto(newPhotos)])
 
     return URLs
   }

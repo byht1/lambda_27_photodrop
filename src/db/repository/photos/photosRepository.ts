@@ -1,7 +1,7 @@
 import { eq, sql } from 'drizzle-orm'
 import { getDrizzle } from 'db/connectDB'
 import { photos } from 'db/schema/photos.schema'
-import { IPhotosRepository, TAddPersonFn, TGetAllFn, TGetBuIdFn, TMaxPhotosToAlbumFn } from './type'
+import { IPhotosRepository, TAddPersonFn, TAddPhotoFn, TGetAllFn, TGetBuIdFn } from './type'
 import { arrayCat } from '../helpers'
 
 export class PhotosRepository implements IPhotosRepository {
@@ -44,14 +44,8 @@ export class PhotosRepository implements IPhotosRepository {
     return photo[0]
   }
 
-  maxPhotosToAlbum: TMaxPhotosToAlbumFn = async (searchAlbumId) => {
-    const { albumId } = this.table
-    const [maxDBElements] = await this.db
-      .select({ count: sql<number>`count(*)`.mapWith((it) => +it) })
-      .from(this.table)
-      .where(eq(albumId, searchAlbumId))
-
-    return maxDBElements.count
+  addPhoto: TAddPhotoFn = async (newPhoto) => {
+    await this.db.insert(this.table).values(newPhoto)
   }
 
   private isAlbumOwner = (isOwner: boolean) => {

@@ -15,6 +15,13 @@
       "when": 1683742769592,
       "tag": "0001_parched_thunderbird",
       "breakpoints": false
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1685082191533,
+      "tag": "0002_bouncy_giant_man",
+      "breakpoints": false
     }
   ]
 }

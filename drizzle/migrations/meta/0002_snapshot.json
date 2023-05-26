@@ -1,0 +1,292 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "id": "1ad3957c-b87d-4755-a3af-8f5a5edd26e1",
+  "prevId": "9efebfdc-dc4a-4518-9cc1-7ef3541d5ff4",
+  "tables": {
+    "albums": {
+      "name": "albums",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "owner": {
+          "name": "owner",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "first_name": {
+          "name": "first_name",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "counter_photo": {
+          "name": "counter_photo",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "location": {
+          "name": "location",
+          "type": "varchar(250)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "varchar(25)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "albums_owner_photographers_id_fk": {
+          "name": "albums_owner_photographers_id_fk",
+          "tableFrom": "albums",
+          "tableTo": "photographers",
+          "columnsFrom": [
+            "owner"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {}
+    },
+    "albums_of_photographers": {
+      "name": "albums_of_photographers",
+      "schema": "",
+      "columns": {
+        "photographers_id": {
+          "name": "photographers_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "albums_id": {
+          "name": "albums_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "albums_of_photographers_photographers_id_photographers_id_fk": {
+          "name": "albums_of_photographers_photographers_id_photographers_id_fk",
+          "tableFrom": "albums_of_photographers",
+          "tableTo": "photographers",
+          "columnsFrom": [
+            "photographers_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "albums_of_photographers_albums_id_albums_id_fk": {
+          "name": "albums_of_photographers_albums_id_albums_id_fk",
+          "tableFrom": "albums_of_photographers",
+          "tableTo": "albums",
+          "columnsFrom": [
+            "albums_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "albums_of_photographers_albums_id_photographers_id": {
+          "name": "albums_of_photographers_albums_id_photographers_id",
+          "columns": [
+            "albums_id",
+            "photographers_id"
+          ]
+        }
+      }
+    },
+    "photographers": {
+      "name": "photographers",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "first_name": {
+          "name": "first_name",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_name": {
+          "name": "last_name",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password": {
+          "name": "password",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "login": {
+          "name": "login",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "role": {
+          "name": "role",
+          "type": "varchar(25)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'photographers'"
+        },
+        "token": {
+          "name": "token",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "emailIdx": {
+          "name": "emailIdx",
+          "columns": [
+            "email"
+          ],
+          "isUnique": true
+        },
+        "loginIdx": {
+          "name": "loginIdx",
+          "columns": [
+            "login"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {}
+    },
+    "photos": {
+      "name": "photos",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "album_id": {
+          "name": "album_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "people": {
+          "name": "people",
+          "type": "varchar[]",
+          "primaryKey": false,
+          "notNull": false,
+          "default": []
+        },
+        "original_resized_url": {
+          "name": "original_resized_url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'https://photo-drop-lambda.s3.eu-central-1.amazonaws.com/logo.jpg'"
+        },
+        "watermark_resized_url": {
+          "name": "watermark_resized_url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'https://photo-drop-lambda.s3.eu-central-1.amazonaws.com/logo.jpg'"
+        },
+        "original_url": {
+          "name": "original_url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'https://photo-drop-lambda.s3.eu-central-1.amazonaws.com/logo.jpg'"
+        },
+        "watermark_url": {
+          "name": "watermark_url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'https://photo-drop-lambda.s3.eu-central-1.amazonaws.com/logo.jpg'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "photos_album_id_albums_id_fk": {
+          "name": "photos_album_id_albums_id_fk",
+          "tableFrom": "photos",
+          "tableTo": "albums",
+          "columnsFrom": [
+            "album_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {
+      "\"photos\".\"first_name\"": "\"photos\".\"name\""
+    }
+  }
+}

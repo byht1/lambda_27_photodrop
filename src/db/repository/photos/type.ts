@@ -4,7 +4,7 @@ export interface IPhotosRepository {
   getAll: TGetAllFn
   getById: TGetBuIdFn
   addPerson: TAddPersonFn
-  maxPhotosToAlbum: TMaxPhotosToAlbumFn
+  addPhoto: TAddPhotoFn
 }
 
 export type TGetAllFn = (albumId: string, isOwner: boolean) => Promise<TGetAllPhotosAlbum[]>
@@ -14,7 +14,7 @@ export type TAddPersonFn = (
   phoneNumbers: string[],
   isOwner: boolean
 ) => Promise<TGetAllPhotosAlbum>
-export type TMaxPhotosToAlbumFn = (userId: string) => Promise<number>
+export type TAddPhotoFn = (newPhoto: TNewPhotos[]) => Promise<void>
 
 // export type TGetAllPhotosAlbum = Omit<TPhotos, 'albumId' | 'originalUrl'>;
 export type TGetAllPhotosAlbum = Pick<TPhotos, 'id' | 'name' | 'people'> & TUrl

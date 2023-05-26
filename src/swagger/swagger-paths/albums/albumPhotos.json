@@ -47,6 +47,10 @@
                 "items": {
                   "type": "object",
                   "properties": {
+                    "photoId": {
+                      "type": "string",
+                      "example": "1c8076e9-09e7-4eb5-9888-3cd0c9061805"
+                    },
                     "url": {
                       "type": "string",
                       "example": "https://s3.eu-central-1.amazonaws.com/photo-drop-lambda"
