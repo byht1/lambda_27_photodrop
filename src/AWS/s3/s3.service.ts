@@ -24,7 +24,7 @@ export class S3Service implements IS3Service {
       Fields: {
         Key: pathToFile,
       },
-      Expires: 36000,
+      Expires: 7200,
     })
   }
 }
